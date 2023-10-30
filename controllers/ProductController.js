@@ -2,7 +2,22 @@ const Product = require("../models/ProductModel");
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find({});
+    const { minQuantity, maxPrice, search } = req.query;
+    let query = {};
+
+    if (minQuantity) {
+      query.quantity = { $gte: parseInt(minQuantity) };
+    }
+
+    if (maxPrice) {
+      query.price = { $lte: parseFloat(maxPrice) };
+    }
+
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+
+    const products = await Product.find(query);
     res.status(200).json(products);
   } catch (err) {
     console.log(err.message);

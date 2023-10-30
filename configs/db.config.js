@@ -1,13 +1,17 @@
 // const mongoose = require("mongoose");
 // const { dbConnectionString } = require("./env.config");
 
-// const connectToDatabase = () => {
-//   try {
-//     mongoose.set("strictQuery", false);
-//     return mongoose.connect(dbConnectionString);
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// };
+// mongoose.set("strictQuery", false);
 
-// module.exports = { connectToDatabase };
+// const dbConnect = mongoose
+//   .connect(dbConnectionString)
+//   .then(() => {
+//     console.log("Connected to MongoDB!");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+// module.exports = {
+//   dbConnect,
+// };
